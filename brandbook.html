@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Synapta — Brand Book</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #161310;
+    --surface:   #201D18;
+    --surface2:  #2A2620;
+    --border:    rgba(255,141,40,0.12);
+    --border-m:  rgba(255,141,40,0.22);
+    --orange:    #FF8D28;
+    --orange-s:  #d96b00;
+    --gold:      #FFD27E;
+    --gold-dim:  rgba(255,210,126,0.15);
+    --text:      #F0E8DC;
+    --text-dim:  #9A8E82;
+    --text-dimmer: #6B6056;
+    --green:     #28a84a;
+    --green-bg:  rgba(40,168,74,0.1);
+    --blue:      #3b82c4;
+    --blue-bg:   rgba(59,130,196,0.1);
+    --amber:     #c48a00;
+    --amber-bg:  rgba(196,138,0,0.1);
+    --yes:       #4ADE80;
+    --no:        #F87171;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { text-decoration: none; color: inherit; }
+
+  .page { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+
+  section { padding: 5rem 0; border-bottom: 1px solid var(--border); }
+  section:last-of-type { border-bottom: none; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(22,19,16,0.94);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 16px; font-weight: 700; color: var(--text); letter-spacing: -.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; color: var(--text-dimmer); letter-spacing: .04em;
+    text-transform: uppercase; transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--orange); }
+  .nav-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; color: var(--orange);
+    background: rgba(255,141,40,0.08);
+    border: 1px solid rgba(255,141,40,0.22);
+    border-radius: 20px; padding: 3px 12px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    position: relative; overflow: hidden;
+    border-bottom: 1px solid var(--border);
+    padding: 6rem 2rem;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,141,40,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,141,40,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    pointer-events: none;
+  }
+  .hero-glow {
+    position: absolute;
+    width: 640px; height: 640px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,141,40,0.07) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .hero-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; letter-spacing: .07em; text-transform: uppercase;
+    color: var(--orange);
+    background: rgba(255,141,40,0.08);
+    border: 1px solid rgba(255,141,40,0.22);
+    border-radius: 20px; padding: 4px 16px;
+    display: inline-block; margin-bottom: 2.5rem;
+    position: relative;
+  }
+  .hero-wordmark {
+    font-size: clamp(72px, 13vw, 128px);
+    font-weight: 700;
+    letter-spacing: -.045em;
+    color: var(--text);
+    line-height: .95;
+    position: relative; margin-bottom: 1rem;
+  }
+  .hero-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--text-dimmer); margin-bottom: 2.5rem;
+  }
+  .hero-slogan {
+    font-size: clamp(17px, 2.4vw, 22px);
+    font-weight: 300;
+    color: var(--text-dim);
+    max-width: 520px; line-height: 1.5;
+  }
+  .hero-slogan strong { color: var(--text); font-weight: 600; }
+  .hero-divider {
+    width: 60px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--orange), transparent);
+    margin: 2.5rem auto;
+  }
+  .hero-meta {
+    display: flex; gap: 3.5rem; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; color: var(--text-dimmer);
+    text-transform: uppercase; letter-spacing: .04em;
+    position: relative;
+  }
+  .hero-meta span strong {
+    color: var(--orange); display: block;
+    font-size: 22px; font-weight: 700;
+    letter-spacing: -.03em; margin-bottom: 2px;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+
+  /* ── SECTION HEADERS ── */
+  .sec-chip {
+    display: inline-flex; align-items: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: .07em; text-transform: uppercase;
+    color: var(--orange);
+    background: rgba(255,141,40,0.08);
+    border: 1px solid rgba(255,141,40,0.2);
+    border-radius: 20px; padding: 4px 14px; margin-bottom: 1.25rem;
+  }
+  .sec-title {
+    font-size: clamp(28px, 4.5vw, 42px);
+    font-weight: 700; letter-spacing: -.03em;
+    color: var(--text); line-height: 1.1;
+    margin-bottom: .5rem;
+  }
+  .sec-title .hl { color: var(--orange); }
+  .sec-sub { font-size: 15px; color: var(--text-dim); max-width: 540px; line-height: 1.65; margin-bottom: 3rem; }
+
+  /* ── ARG LIST ── */
+  .arg-list { display: flex; flex-direction: column; gap: 1rem; }
+  .arg-item {
+    display: flex; gap: 1.25rem; align-items: flex-start;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.25rem 1.5rem;
+  }
+  .arg-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 26px; font-weight: 600;
+    color: rgba(255,141,40,0.18);
+    line-height: 1; flex-shrink: 0; width: 36px;
+  }
+  .arg-body h4 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .arg-body p { font-size: 13px; color: var(--text-dim); line-height: 1.65; margin: 0; }
+
+  /* ── PROPUESTA ── */
+  .vp-full {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 2.5rem 3rem;
+    margin-bottom: 1.5rem;
+    border-left: 3px solid var(--orange);
+  }
+  .vp-full p { font-size: 16px; color: var(--text); line-height: 1.85; }
+  .vp-full strong { color: var(--orange); font-weight: 600; }
+  .vp-blocks { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+  .vp-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem;
+  }
+  .vp-block.accent { border-color: var(--border-m); background: rgba(255,141,40,0.04); }
+  .vp-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--text-dimmer); margin-bottom: 8px;
+  }
+  .vp-label.orange { color: var(--orange); }
+  .vp-text { font-size: 14px; color: var(--text); line-height: 1.65; }
+  .vp-text strong { color: var(--orange); }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+  .pill {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border-m);
+    color: var(--text-dimmer);
+    background: rgba(255,141,40,0.05);
+  }
+
+  /* ── MENSAJES / SLOGANS ── */
+  .msg-primary {
+    background: var(--surface);
+    border: 1px solid var(--border-m);
+    border-radius: 16px; padding: 2.5rem 3rem;
+    position: relative; overflow: hidden; margin-bottom: 1.5rem;
+  }
+  .msg-primary::before {
+    content: '★ PRINCIPAL';
+    position: absolute; top: 16px; right: 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: .05em;
+    color: var(--orange);
+    background: rgba(255,141,40,0.1);
+    border: 1px solid rgba(255,141,40,0.2);
+    border-radius: 20px; padding: 3px 10px;
+  }
+  .msg-text {
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 700; letter-spacing: -.025em;
+    color: var(--text); line-height: 1.2; margin-bottom: 1rem;
+  }
+  .msg-text .hl { color: var(--orange); }
+  .msg-why { font-size: 13px; color: var(--text-dim); line-height: 1.65; }
+  .msg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .msg-alt {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem;
+  }
+  .msg-alt p {
+    font-size: 16px; font-weight: 600;
+    color: var(--text); letter-spacing: -.02em;
+    margin-bottom: 8px; line-height: 1.35;
+  }
+  .msg-alt .why { font-size: 12px; color: var(--text-dimmer); line-height: 1.55; }
+
+  /* ── PALETA ── */
+  .palette-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-bottom: 1.5rem; }
+  .palette-row-2 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 2.5rem; }
+  .swatch { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+  .swatch-color { height: 80px; }
+  .swatch-info { padding: 10px 12px; background: var(--surface); }
+  .swatch-name { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .swatch-hex { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--text-dimmer); }
+  .swatch-role { font-size: 10px; color: var(--text-dimmer); margin-top: 4px; line-height: 1.4; }
+
+  /* ── TIPOGRAFÍA ── */
+  .type-showcase { display: flex; flex-direction: column; gap: 1rem; }
+  .type-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 2rem 2.5rem;
+    display: flex; gap: 2rem; align-items: flex-start;
+  }
+  .type-meta { flex-shrink: 0; width: 150px; }
+  .type-role {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--orange); margin-bottom: 4px;
+  }
+  .type-name { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .type-use { font-size: 11px; color: var(--text-dimmer); line-height: 1.55; }
+  .type-divider { width: 1px; background: var(--border); flex-shrink: 0; align-self: stretch; }
+  .type-sample { flex: 1; }
+
+  /* ── LOGO ── */
+  .logo-stage {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 3rem 2rem;
+    display: flex; align-items: center; justify-content: center;
+    gap: 4rem; flex-wrap: wrap; margin-bottom: 1rem;
+  }
+  .logo-stage.light {
+    background: #faf6f1;
+    border-color: #e0d8cf;
+  }
+  .logo-stage.dark-brand { background: #1c1a17; border-color: rgba(255,255,255,.07); }
+  .logo-variant { text-align: center; }
+  .logo-variant-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: .05em;
+    text-transform: uppercase; color: var(--text-dimmer); margin-top: 14px;
+  }
+
+  /* ── ELEMENTOS DE MARCA ── */
+  .element-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem; }
+  .element-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.75rem;
+  }
+  .element-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: .06em; text-transform: uppercase;
+    color: var(--text-dimmer); margin-bottom: 14px;
+  }
+  .element-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .element-body { font-size: 13px; color: var(--text-dim); line-height: 1.65; }
+
+  /* ── REGLAS ── */
+  .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .rule-card { border-radius: 12px; padding: 1.75rem; }
+  .rule-yes { background: rgba(15,90,60,0.1); border: 1px solid rgba(15,90,60,0.3); }
+  .rule-no  { background: rgba(120,30,20,0.1); border: 1px solid rgba(120,30,20,0.3); }
+  .rule-title { font-size: 13px; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+  .rule-yes .rule-title { color: var(--yes); }
+  .rule-no  .rule-title { color: var(--no); }
+  .rule-item { font-size: 13px; color: var(--text-dim); margin-bottom: 9px; display: flex; align-items: flex-start; gap: 8px; line-height: 1.55; }
+  .dot-yes { width: 6px; height: 6px; border-radius: 50%; background: var(--yes); flex-shrink: 0; margin-top: 6px; }
+  .dot-no  { width: 6px; height: 6px; border-radius: 50%; background: var(--no);  flex-shrink: 0; margin-top: 6px; }
+
+  /* ── VOZ ── */
+  .voice-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem; }
+  .voice-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem;
+  }
+  .voice-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; font-weight: 600;
+    color: var(--orange); letter-spacing: .05em; margin-bottom: 8px;
+  }
+  .voice-card h4 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+  .voice-card p { font-size: 13px; color: var(--text-dim); line-height: 1.65; }
+  .say-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .say-card {
+    border-radius: 12px; padding: 1.5rem;
+  }
+  .say-yes { background: rgba(15,90,60,0.08); border: 1px solid rgba(15,90,60,0.25); }
+  .say-no  { background: rgba(120,30,20,0.08); border: 1px solid rgba(120,30,20,0.25); }
+  .say-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: .05em; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .say-yes .say-label { color: var(--yes); }
+  .say-no  .say-label { color: var(--no); }
+  .say-item { font-size: 13px; color: var(--text-dim); margin-bottom: 9px; display: flex; gap: 9px; align-items: flex-start; line-height: 1.55; }
+
+  /* ── APPS ── */
+  .app-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden; margin-bottom: 1.5rem;
+  }
+  .app-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--text-dimmer);
+    padding: 10px 18px; background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+  }
+  .app-inner { padding: 2rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center; padding: 4rem 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .footer-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; color: var(--text-dimmer);
+    letter-spacing: .06em; text-transform: uppercase; margin-top: 10px; margin-bottom: 2rem;
+  }
+  .footer-meta { font-size: 11px; color: var(--text-dimmer); font-family: 'IBM Plex Mono', monospace; }
+
+  /* Inline data chip — Synapta signature element */
+  .hl-demo {
+    display: inline;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .78em; font-weight: 600;
+    letter-spacing: .02em;
+    color: #d96b00;
+    background: rgba(255,141,40,0.1);
+    border: 1px solid rgba(255,141,40,0.28);
+    border-radius: 5px;
+    padding: 3px 9px;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  .hl-demo-inv {
+    display: inline;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .78em; font-weight: 600;
+    letter-spacing: .02em;
+    color: #FFD27E;
+    background: rgba(255,210,126,0.1);
+    border: 1px solid rgba(255,210,126,0.2);
+    border-radius: 5px;
+    padding: 3px 9px;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  @media print {
+    nav { display: none; }
+    section { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg viewBox="0 0 400 400" width="22" height="22" fill="none">
+      <path d="M306 32L200 382" stroke="#FFD27E" stroke-width="26" stroke-linecap="round"/>
+      <path d="M23 377L207 377" stroke="#FFD27E" stroke-width="26" stroke-linecap="round"/>
+      <path d="M306 36L377 36" stroke="#FFD27E" stroke-width="26" stroke-linecap="round"/>
+      <path d="M200 30H377" stroke="#FF8D28" stroke-width="26" stroke-linecap="round"/>
+      <path d="M289 30L186 370" stroke="#FF8D28" stroke-width="26" stroke-linecap="round"/>
+      <path d="M23 365H193" stroke="#FF8D28" stroke-width="26" stroke-linecap="round"/>
+      <path d="M299 26L193 376" stroke="#6b6056" stroke-width="26" stroke-linecap="round"/>
+      <path d="M23 371H200" stroke="#6b6056" stroke-width="26" stroke-linecap="round"/>
+      <path d="M202 24H377" stroke="#6b6056" stroke-width="26" stroke-linecap="round"/>
+      <line x1="209" y1="19" x2="102" y2="371" stroke="#6b6056" stroke-width="26" stroke-linecap="round"/>
+    </svg>
+    Synapta
+  </div>
+  <div class="nav-links">
+    <a href="#marca">Marca</a>
+    <a href="#propuesta">Propuesta</a>
+    <a href="#mensajes">Mensajes</a>
+    <a href="#identidad">Identidad</a>
+    <a href="#elementos">Elementos</a>
+    <a href="#voz">Voz</a>
+  </div>
+  <div class="nav-tag">Brand Book · 2026</div>
+</nav>
+
+
+<!-- HERO / PORTADA -->
+<section class="hero" id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-label">// Brand Book · Pre-lanzamiento</div>
+  <h1 class="hero-wordmark">Synapta</h1>
+  <div class="hero-sub">synapta.ec · Quito, Ecuador · 2026</div>
+  <p class="hero-slogan">
+    <strong>Inteligencia operacional</strong> para PyMEs ecuatorianas.<br>
+    Medimos lo que ya haces. Devolvemos datos que deciden.
+  </p>
+  <div class="hero-divider"></div>
+  <div class="hero-meta">
+    <span><strong>2</strong>Líneas de producto</span>
+    <span><strong>8</strong>Productos en roadmap</span>
+    <span><strong>2027</strong>Lanzamiento comercial</span>
+  </div>
+</section>
+
+
+<!-- 01 · LA MARCA -->
+<section id="marca">
+<div class="page">
+  <div class="sec-chip">01 · La Marca</div>
+  <h2 class="sec-title">Un nombre que<br>describe lo que <span class="hl">hace</span></h2>
+  <p class="sec-sub">Synapta no es un nombre inventado. Es una derivación de "synapse" — la conexión entre neuronas que transmite información y desencadena acción. Es exactamente lo que hace el producto: conectar los datos de una operación con las decisiones que la mueven.</p>
+
+  <div class="arg-list">
+    <div class="arg-item">
+      <div class="arg-num">01</div>
+      <div class="arg-body">
+        <h4>Contiene su función en el nombre</h4>
+        <p>Synapse → Synapta. La sinapsis conecta; Synapta conecta datos con decisiones. El cliente no necesita que nadie le explique la metáfora — la intuye.</p>
+      </div>
+    </div>
+    <div class="arg-item">
+      <div class="arg-num">02</div>
+      <div class="arg-body">
+        <h4>Suena técnico y humano al mismo tiempo</h4>
+        <p>No es un acrónimo, no es una sigla, no es una palabra en inglés. Es pronunciable, recordable y funciona en español sin adaptación. Convive con cualquier industria sin sonar genérico.</p>
+      </div>
+    </div>
+    <div class="arg-item">
+      <div class="arg-num">03</div>
+      <div class="arg-body">
+        <h4>Los productos heredan el nombre</h4>
+        <p>Toda la línea de productos se nombra como <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--orange);">synapta.nombre</span> — rosas, varillas, ganado, datos, agentes. El nombre de marca se convierte en espacio de nombrado. Escalable sin perder coherencia.</p>
+      </div>
+    </div>
+    <div class="arg-item">
+      <div class="arg-num">04</div>
+      <div class="arg-body">
+        <h4>Posicionamiento limpio en Ecuador</h4>
+        <p>Synapta.ec como dominio y @synapta.ia como handle. Nombre corto, disponible, que no compite con ninguna marca establecida en la región.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Brand personality -->
+  <div style="margin-top:2.5rem;">
+    <h3 style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:1rem;letter-spacing:-.02em;">Personalidad de marca</h3>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1rem;text-align:center;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:600;color:var(--orange);margin-bottom:6px;">01</div>
+        <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;">Directo</div>
+        <div style="font-size:11px;color:var(--text-dimmer);line-height:1.5;">Sin rodeos. Lo que dice, lo dice claro.</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1rem;text-align:center;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:600;color:var(--orange);margin-bottom:6px;">02</div>
+        <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;">Técnico</div>
+        <div style="font-size:11px;color:var(--text-dimmer);line-height:1.5;">Preciso. Habla el idioma de los datos.</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1rem;text-align:center;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:600;color:var(--orange);margin-bottom:6px;">03</div>
+        <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;">Honesto</div>
+        <div style="font-size:11px;color:var(--text-dimmer);line-height:1.5;">Sin métricas inventadas. Sin clientes falsos.</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1rem;text-align:center;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:600;color:var(--orange);margin-bottom:6px;">04</div>
+        <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;">Local</div>
+        <div style="font-size:11px;color:var(--text-dimmer);line-height:1.5;">Hecho en Quito para el contexto del país.</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1rem;text-align:center;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:600;color:var(--orange);margin-bottom:6px;">05</div>
+        <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;">Accesible</div>
+        <div style="font-size:11px;color:var(--text-dimmer);line-height:1.5;">Hecho para PyMEs. No para corporaciones.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- 02 · PROPUESTA DE VALOR -->
+<section id="propuesta">
+<div class="page">
+  <div class="sec-chip">02 · Propuesta de Valor</div>
+  <h2 class="sec-title">Lo que <span class="hl">prometemos</span><br>en cada conversación</h2>
+  <p class="sec-sub">Una promesa clara, honesta y sin tecnicismos vacíos. Vendemos valor, no tecnología.</p>
+
+  <div class="vp-full">
+    <p><strong>Synapta</strong> es una empresa de automatización operacional especializada en medición y análisis de procesos físicos para PyMEs ecuatorianas. Trabajamos con industrias que hoy dependen de conteos manuales, estimaciones y registros en papel para tomar decisiones críticas de operación. A través de sistemas que se integran a lo que ya existe — sin reemplazar equipos ni contratar analistas — <strong>convertimos la información que ya genera tu operación en datos accionables: conteos, alertas y métricas de gerencia</strong>. El objetivo no es vender tecnología: es que cada decisión que tomes esté respaldada por números reales.</p>
+  </div>
+
+  <div class="vp-blocks">
+    <div class="vp-block">
+      <div class="vp-label">Para quién</div>
+      <div class="vp-text">PyMEs ecuatorianas en <strong>floricultura, ganadería, metalurgia y retail</strong> que toman decisiones de operación con datos incompletos o estimados.</div>
+    </div>
+    <div class="vp-block">
+      <div class="vp-label">El problema</div>
+      <div class="vp-text">Cada proceso sin medir carga un margen de error acumulado. <strong>Ese margen tiene costo</strong> — en producción sub-óptima, en entregas mal contadas, en decisiones tomadas tarde.</div>
+    </div>
+    <div class="vp-block">
+      <div class="vp-label">La solución</div>
+      <div class="vp-text">Sistemas de medición automática que se instalan sobre lo que ya existe y devuelven datos en tiempo real.
+        <div class="pill-row">
+          <span class="pill">Visión artificial</span>
+          <span class="pill">Conteo automático</span>
+          <span class="pill">Alertas operacionales</span>
+          <span class="pill">Métricas de gerencia</span>
+          <span class="pill">Agentes de proceso</span>
+        </div>
+      </div>
+    </div>
+    <div class="vp-block accent">
+      <div class="vp-label orange">Diferenciador clave</div>
+      <div class="vp-text">No vendemos software genérico importado. <strong>Cada solución se entrena y calibra para el contexto específico del cliente</strong> — el lote, el producto, la industria, la escala ecuatoriana.</div>
+    </div>
+  </div>
+
+  <!-- Líneas de producto -->
+  <h3 style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:1rem;letter-spacing:-.02em;">Líneas de producto</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;">// LÍNEA 01 · VISIÓN ARTIFICIAL</div>
+      <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:10px;">Medición automática de lo que ya produces.</div>
+      <div style="display:flex;flex-direction:column;gap:7px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:var(--surface2);border-radius:7px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text);">synapta.rosas</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 8px;border-radius:100px;background:var(--green-bg);color:var(--green);border:1px solid rgba(40,168,74,.2);">EN DESARROLLO</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:var(--surface2);border-radius:7px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text);">synapta.varillas</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 8px;border-radius:100px;background:var(--blue-bg);color:var(--blue);border:1px solid rgba(59,130,196,.2);">EN DISEÑO</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:var(--surface2);border-radius:7px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text);">synapta.ganado</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 8px;border-radius:100px;background:var(--blue-bg);color:var(--blue);border:1px solid rgba(59,130,196,.2);">EN DISEÑO</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:var(--surface2);border-radius:7px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text);">synapta.sanidad</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 8px;border-radius:100px;background:var(--amber-bg);color:var(--amber);border:1px solid rgba(196,138,0,.2);">EN CONCEPTO</span>
+        </div>
+      </div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;">// LÍNEA 02 · SISTEMA DE TRABAJO</div>
+      <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:10px;">De la operación diaria a decisiones de gerencia.</div>
+      <div style="display:flex;flex-direction:column;gap:7px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:var(--surface2);border-radius:7px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text);">synapta.datos</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 8px;border-radius:100px;background:var(--amber-bg);color:var(--amber);border:1px solid rgba(196,138,0,.2);">EN CONCEPTO</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:var(--surface2);border-radius:7px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text);">synapta.agentes</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 8px;border-radius:100px;background:var(--amber-bg);color:var(--amber);border:1px solid rgba(196,138,0,.2);">EN CONCEPTO</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:var(--surface2);border-radius:7px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text);">synapta.performance</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 8px;border-radius:100px;background:var(--amber-bg);color:var(--amber);border:1px solid rgba(196,138,0,.2);">EN CONCEPTO</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:var(--surface2);border-radius:7px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--text);">synapta.proveedores</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:9px;padding:2px 8px;border-radius:100px;background:var(--amber-bg);color:var(--amber);border:1px solid rgba(196,138,0,.2);">EN CONCEPTO</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- 03 · MENSAJES CLAVE -->
+<section id="mensajes">
+<div class="page">
+  <div class="sec-chip">03 · Mensajes Clave</div>
+  <h2 class="sec-title">Las frases que <span class="hl">posicionan</span><br>cada conversación</h2>
+  <p class="sec-sub">Mensajes calibrados para distintos momentos: pitch, landing, presentación y cierre. Ninguno menciona tecnología genérica — todos venden valor concreto.</p>
+
+  <div class="msg-primary">
+    <div class="msg-text">Automatiza lo que ya <span class="hl">produces.</span></div>
+    <p class="msg-why">Mensaje principal del hero. Activa el insight clave: no hace falta cambiar nada en tu operación para empezar. Lo que ya haces puede medirse solo. Directo, imperativo, sin adornos.</p>
+  </div>
+
+  <div class="msg-grid">
+    <div class="msg-alt">
+      <p>Los datos que generas no están trabajando para ti.</p>
+      <div class="why">Sección de tesis. Activa el dolor sin culpar al cliente — el problema no es él, es que la información no está siendo usada. Genera apertura inmediata.</div>
+    </div>
+    <div class="msg-alt">
+      <p>Cada proceso sin medir es valor que se escapa.</p>
+      <div class="why">Sección de valor. Conecta la ausencia de datos con pérdida económica real. Hace que el costo de no actuar sea concreto e inmediato.</div>
+    </div>
+    <div class="msg-alt">
+      <p>Las decisiones con datos no son solo para corporaciones.</p>
+      <div class="why">Sección de razón de ser. Democratiza la capacidad analítica. Posiciona a Synapta como el que nivela el campo de juego entre grandes y pequeños.</div>
+    </div>
+    <div class="msg-alt" style="border-color:var(--border-m);background:rgba(255,141,40,0.04);">
+      <p style="color:var(--orange);">¿Tienes un proceso que se podría medir solo?</p>
+      <div class="why">CTA de entrada al piloto. Pregunta que califica al cliente mientras lo invita. Baja la barrera de acción — solo tiene que responder una pregunta, no comprar nada.</div>
+    </div>
+  </div>
+
+  <!-- Mensajes por audiencia -->
+  <h3 style="font-size:16px;font-weight:700;color:var(--text);margin:2rem 0 1rem;letter-spacing:-.02em;">Por industria</h3>
+  <div style="display:flex;flex-direction:column;gap:.75rem;">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.5rem;display:flex;gap:1.5rem;align-items:flex-start;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--orange);letter-spacing:.05em;white-space:nowrap;padding-top:2px;">FLORICULTURA</div>
+      <div style="font-size:14px;color:var(--text-dim);">Sabe cuántos tallos están listos antes de que tu equipo llegue al lote. Cada corte en el momento exacto.</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.5rem;display:flex;gap:1.5rem;align-items:flex-start;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--orange);letter-spacing:.05em;white-space:nowrap;padding-top:2px;">METALURGIA</div>
+      <div style="font-size:14px;color:var(--text-dim);">Cuenta lo que entra y lo que sale. Sin contar a mano. Sin discutir con el proveedor por diferencias de inventario.</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.5rem;display:flex;gap:1.5rem;align-items:flex-start;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--orange);letter-spacing:.05em;white-space:nowrap;padding-top:2px;">GANADERÍA</div>
+      <div style="font-size:14px;color:var(--text-dim);">Cabezas en el potrero, no estimaciones. Un número confiable antes de cada decisión de compra o venta.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- 04 · IDENTIDAD VISUAL -->
+<section id="identidad">
+<div class="page">
+  <div class="sec-chip">04 · Identidad Visual</div>
+  <h2 class="sec-title">El sistema que hace<br>a Synapta <span class="hl">inconfundible</span></h2>
+  <p class="sec-sub">Cálido, técnico y honesto. Una identidad que comunica rigor antes de leer una sola palabra.</p>
+
+  <!-- Logo -->
+  <h3 style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:1rem;letter-spacing:-.02em;">Variantes del logotipo</h3>
+
+  <!-- Logo sobre dark -->
+  <div class="logo-stage" style="margin-bottom:4px;">
+    <div class="logo-variant">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <svg viewBox="0 0 400 400" width="40" height="40" fill="none">
+          <path d="M306 32L200 382" stroke="#FFD27E" stroke-width="22" stroke-linecap="round"/>
+          <path d="M23 377L207 377" stroke="#FFD27E" stroke-width="22" stroke-linecap="round"/>
+          <path d="M306 36L377 36" stroke="#FFD27E" stroke-width="22" stroke-linecap="round"/>
+          <path d="M200 30H377" stroke="#FF8D28" stroke-width="22" stroke-linecap="round"/>
+          <path d="M289 30L186 370" stroke="#FF8D28" stroke-width="22" stroke-linecap="round"/>
+          <path d="M23 365H193" stroke="#FF8D28" stroke-width="22" stroke-linecap="round"/>
+          <path d="M299 26L193 376" stroke="#9a8e82" stroke-width="22" stroke-linecap="round"/>
+          <path d="M23 371H200" stroke="#9a8e82" stroke-width="22" stroke-linecap="round"/>
+          <path d="M202 24H377" stroke="#9a8e82" stroke-width="22" stroke-linecap="round"/>
+          <line x1="209" y1="19" x2="102" y2="371" stroke="#9a8e82" stroke-width="22" stroke-linecap="round"/>
+        </svg>
+        <span style="font-size:32px;font-weight:700;color:var(--text);letter-spacing:-.03em;">Synapta</span>
+      </div>
+      <div class="logo-variant-label">Wordmark principal · fondo oscuro</div>
+    </div>
+    <div class="logo-variant">
+      <div style="display:flex;align-items:center;gap:9px;">
+        <svg viewBox="0 0 400 400" width="28" height="28" fill="none">
+          <path d="M306 32L200 382" stroke="#FFD27E" stroke-width="22" stroke-linecap="round"/>
+          <path d="M23 377L207 377" stroke="#FFD27E" stroke-width="22" stroke-linecap="round"/>
+          <path d="M306 36L377 36" stroke="#FFD27E" stroke-width="22" stroke-linecap="round"/>
+          <path d="M200 30H377" stroke="#FF8D28" stroke-width="22" stroke-linecap="round"/>
+          <path d="M289 30L186 370" stroke="#FF8D28" stroke-width="22" stroke-linecap="round"/>
+          <path d="M23 365H193" stroke="#FF8D28" stroke-width="22" stroke-linecap="round"/>
+          <path d="M299 26L193 376" stroke="#9a8e82" stroke-width="22" stroke-linecap="round"/>
+          <path d="M23 371H200" stroke="#9a8e82" stroke-width="22" stroke-linecap="round"/>
+          <path d="M202 24H377" stroke="#9a8e82" stroke-width="22" stroke-linecap="round"/>
+          <line x1="209" y1="19" x2="102" y2="371" stroke="#9a8e82" stroke-width="22" stroke-linecap="round"/>
+        </svg>
+        <span style="font-size:20px;font-weight:700;color:var(--text);letter-spacing:-.02em;">Synapta</span>
+      </div>
+      <div class="logo-variant-label">Versión compacta · nav</div>
+    </div>
+    <div class="logo-variant">
+      <div style="width:56px;height:56px;background:var(--surface2);border:1px solid var(--border-m);border-radius:14px;display:flex;align-items:center;justify-content:center;">
+        <svg viewBox="0 0 400 400" width="34" height="34" fill="none">
+          <path d="M306 32L200 382" stroke="#FFD27E" stroke-width="22" stroke-linecap="round"/>
+          <path d="M23 377L207 377" stroke="#FFD27E" stroke-width="22" stroke-linecap="round"/>
+          <path d="M306 36L377 36" stroke="#FFD27E" stroke-width="22" stroke-linecap="round"/>
+          <path d="M200 30H377" stroke="#FF8D28" stroke-width="22" stroke-linecap="round"/>
+          <path d="M289 30L186 370" stroke="#FF8D28" stroke-width="22" stroke-linecap="round"/>
+          <path d="M23 365H193" stroke="#FF8D28" stroke-width="22" stroke-linecap="round"/>
+          <path d="M299 26L193 376" stroke="#4A4643" stroke-width="22" stroke-linecap="round"/>
+          <path d="M23 371H200" stroke="#4A4643" stroke-width="22" stroke-linecap="round"/>
+          <path d="M202 24H377" stroke="#4A4643" stroke-width="22" stroke-linecap="round"/>
+          <line x1="209" y1="19" x2="102" y2="371" stroke="#4A4643" stroke-width="22" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="logo-variant-label">Ícono / Favicon</div>
+    </div>
+  </div>
+
+  <!-- Logo sobre claro -->
+  <div class="logo-stage light" style="margin-bottom:1.5rem;">
+    <div class="logo-variant">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <svg viewBox="0 0 400 400" width="40" height="40" fill="none">
+          <path d="M306 32L200 382" stroke="#FFD27E" stroke-width="22" stroke-linecap="round"/>
+          <path d="M23 377L207 377" stroke="#FFD27E" stroke-width="22" stroke-linecap="round"/>
+          <path d="M306 36L377 36" stroke="#FFD27E" stroke-width="22" stroke-linecap="round"/>
+          <path d="M200 30H377" stroke="#FF8D28" stroke-width="22" stroke-linecap="round"/>
+          <path d="M289 30L186 370" stroke="#FF8D28" stroke-width="22" stroke-linecap="round"/>
+          <path d="M23 365H193" stroke="#FF8D28" stroke-width="22" stroke-linecap="round"/>
+          <path d="M299 26L193 376" stroke="#4A4643" stroke-width="22" stroke-linecap="round"/>
+          <path d="M23 371H200" stroke="#4A4643" stroke-width="22" stroke-linecap="round"/>
+          <path d="M202 24H377" stroke="#4A4643" stroke-width="22" stroke-linecap="round"/>
+          <line x1="209" y1="19" x2="102" y2="371" stroke="#4A4643" stroke-width="22" stroke-linecap="round"/>
+        </svg>
+        <span style="font-size:32px;font-weight:700;color:#2e2b28;letter-spacing:-.03em;">Synapta</span>
+      </div>
+      <div class="logo-variant-label" style="color:#9A8E82;">Wordmark · fondo claro</div>
+    </div>
+  </div>
+
+  <!-- Paleta -->
+  <h3 style="font-size:16px;font-weight:700;color:var(--text);margin:2.5rem 0 1rem;letter-spacing:-.02em;">Paleta de colores</h3>
+
+  <div style="margin-bottom:.5rem;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text-dimmer);letter-spacing:.05em;text-transform:uppercase;">Colores de marca</div>
+  <div class="palette-row" style="margin-bottom:1rem;">
+    <div class="swatch" style="border-color:rgba(255,141,40,0.3);">
+      <div class="swatch-color" style="background:#FF8D28;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Orange</div>
+        <div class="swatch-hex">#FF8D28</div>
+        <div class="swatch-role">Primario · CTAs · .hl chip</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#FFD27E;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Gold</div>
+        <div class="swatch-hex">#FFD27E</div>
+        <div class="swatch-role">Logo secundario · .hl--inv</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#d96b00;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Orange Strong</div>
+        <div class="swatch-hex">#d96b00</div>
+        <div class="swatch-role">Hover · texto chip</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#4A4643;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Warm Dark</div>
+        <div class="swatch-hex">#4A4643</div>
+        <div class="swatch-role">Logo base · texto dim</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#2e2b28;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Near Black</div>
+        <div class="swatch-hex">#2e2b28</div>
+        <div class="swatch-role">Texto principal (light)</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:.5rem;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text-dimmer);letter-spacing:.05em;text-transform:uppercase;">Fondos</div>
+  <div class="palette-row" style="grid-template-columns:repeat(4,1fr);margin-bottom:1rem;">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#faf6f1;border-bottom:1px solid #e0d8cf;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Cream Root</div>
+        <div class="swatch-hex">#faf6f1</div>
+        <div class="swatch-role">Fondo raíz de página</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#f2ece3;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Warm Beige</div>
+        <div class="swatch-hex">#f2ece3</div>
+        <div class="swatch-role">Secciones alternadas</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#fffcf8;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Card White</div>
+        <div class="swatch-hex">#fffcf8</div>
+        <div class="swatch-role">Superficie de tarjetas</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#1c1a17;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Dark Warm</div>
+        <div class="swatch-hex">#1c1a17</div>
+        <div class="swatch-role">Secciones oscuras · CTA</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:.5rem;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text-dimmer);letter-spacing:.05em;text-transform:uppercase;">Estados de producto</div>
+  <div class="palette-row" style="grid-template-columns:repeat(3,1fr);margin-bottom:2.5rem;">
+    <div class="swatch" style="border-color:rgba(40,168,74,0.3);">
+      <div class="swatch-color" style="background:#1d7f3e;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Green</div>
+        <div class="swatch-hex">#1d7f3e</div>
+        <div class="swatch-role">EN DESARROLLO</div>
+      </div>
+    </div>
+    <div class="swatch" style="border-color:rgba(26,105,196,0.3);">
+      <div class="swatch-color" style="background:#1a69c4;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Blue</div>
+        <div class="swatch-hex">#1a69c4</div>
+        <div class="swatch-role">EN DISEÑO</div>
+      </div>
+    </div>
+    <div class="swatch" style="border-color:rgba(160,98,0,0.3);">
+      <div class="swatch-color" style="background:#a06200;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Amber</div>
+        <div class="swatch-hex">#a06200</div>
+        <div class="swatch-role">EN CONCEPTO</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tipografía -->
+  <h3 style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:1rem;letter-spacing:-.02em;">Sistema tipográfico</h3>
+  <div class="type-showcase">
+    <div class="type-card">
+      <div class="type-meta">
+        <div class="type-role">Display + Cuerpo</div>
+        <div class="type-name">IBM Plex Sans</div>
+        <div class="type-use">Títulos, subtítulos, párrafos, botones, nav</div>
+      </div>
+      <div class="type-divider"></div>
+      <div class="type-sample">
+        <div style="font-size:36px;font-weight:700;letter-spacing:-.035em;color:var(--text);line-height:1.05;margin-bottom:10px;">Automatiza lo que<br>ya produces.</div>
+        <div style="font-size:14px;color:var(--text-dim);line-height:1.7;margin-bottom:8px;">Cada operación genera información valiosa que hoy se pierde en cuadernos, hojas sueltas o simplemente sin registrar.</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text-dimmer);">700 · -0.035em tracking · hero<br>400 · 1.7 line-height · body</div>
+      </div>
+    </div>
+    <div class="type-card">
+      <div class="type-meta">
+        <div class="type-role">Labels + Datos</div>
+        <div class="type-name">IBM Plex Mono</div>
+        <div class="type-use">Eyebrows, chips, badges, métricas, SKUs, código</div>
+      </div>
+      <div class="type-divider"></div>
+      <div class="type-sample">
+        <div style="font-family:'IBM Plex Mono',monospace;color:var(--orange);font-size:11px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px;">// LÍNEA 01 · VISIÓN ARTIFICIAL</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;padding:3px 9px;border-radius:100px;background:rgba(40,168,74,.1);color:#28a84a;border:1px solid rgba(40,168,74,.2);">SKU 001 · EN DESARROLLO</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;padding:3px 9px;border-radius:100px;background:rgba(59,130,196,.1);color:#3b82c4;border:1px solid rgba(59,130,196,.2);">SKU 002 · EN DISEÑO</span>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--text);line-height:1.7;">synapta.rosas v0.9 · beta<br><span style="color:var(--text-dimmer);">247 tallos detectados · Lote A-14</span></div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text-dimmer);margin-top:8px;">400/600 · mono · labels, datos, terminal</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reglas de logo -->
+  <h3 style="font-size:16px;font-weight:700;color:var(--text);margin:2.5rem 0 1rem;letter-spacing:-.02em;">Reglas de uso de marca</h3>
+  <div class="rules-grid">
+    <div class="rule-card rule-yes">
+      <div class="rule-title">✓ Siempre correcto</div>
+      <div class="rule-item"><div class="dot-yes"></div><span>Escribir <strong>Synapta</strong> con S mayúscula. Los productos en minúscula: <strong>synapta.rosas</strong></span></div>
+      <div class="rule-item"><div class="dot-yes"></div><span>Usar el logotipo SVG original. Nunca recrear las líneas a mano</span></div>
+      <div class="rule-item"><div class="dot-yes"></div><span>Fondo claro (#faf6f1) o fondo oscuro (#1c1a17) como base preferida</span></div>
+      <div class="rule-item"><div class="dot-yes"></div><span>Mínimo 16px de espacio libre alrededor del símbolo del logo</span></div>
+      <div class="rule-item"><div class="dot-yes"></div><span>IBM Plex Sans para toda comunicación escrita de marca</span></div>
+    </div>
+    <div class="rule-card rule-no">
+      <div class="rule-title">✗ Nunca hacer</div>
+      <div class="rule-item"><div class="dot-no"></div><span>Escribir "synapta" todo minúscula en el wordmark o "SYNAPTA" todo mayúsculas</span></div>
+      <div class="rule-item"><div class="dot-no"></div><span>Cambiar los colores del logotipo SVG (#FFD27E, #FF8D28, #4A4643)</span></div>
+      <div class="rule-item"><div class="dot-no"></div><span>Usar el logo sobre fotografías sin overlay o fondos de colores vibrantes</span></div>
+      <div class="rule-item"><div class="dot-no"></div><span>Deformar, rotar o modificar proporciones del símbolo</span></div>
+      <div class="rule-item"><div class="dot-no"></div><span>Usar tipografías distintas al sistema IBM Plex en materiales de marca</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- 05 · ELEMENTOS DE MARCA -->
+<section id="elementos">
+<div class="page">
+  <div class="sec-chip">05 · Elementos de Marca</div>
+  <h2 class="sec-title">Los componentes que<br>hacen el <span class="hl">sistema</span></h2>
+  <p class="sec-sub">Synapta tiene un lenguaje visual propio construido desde la función del producto. Cada elemento tiene una razón de existir — no es decoración.</p>
+
+  <!-- El chip .hl -->
+  <div style="background:var(--surface);border:1px solid var(--border-m);border-radius:14px;padding:2rem 2.5rem;margin-bottom:1.5rem;border-left:3px solid var(--orange);">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--orange);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px;">// ELEMENTO FIRMA · EL DATA CHIP</div>
+    <div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:8px;">El chip de datos <code style="font-family:'IBM Plex Mono',monospace;font-size:12px;background:var(--surface2);padding:2px 7px;border-radius:4px;color:var(--gold);">.hl</code></div>
+    <p style="font-size:14px;color:var(--text-dim);line-height:1.7;margin-bottom:1.5rem;">El elemento visual más característico de Synapta. Se usa en headings para destacar la palabra de mayor carga semántica — como un label de detección aplicado al lenguaje. Conecta visualmente el producto (detección automática) con la comunicación de marca. Aparece exactamente una vez por heading.</p>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div style="background:var(--surface2);border-radius:10px;padding:1.25rem 1.5rem;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text-dimmer);margin-bottom:10px;letter-spacing:.04em;">SOBRE FONDO CLARO</div>
+        <div style="font-size:28px;font-weight:700;letter-spacing:-.03em;color:#2e2b28;background:#faf6f1;padding:16px 20px;border-radius:8px;">
+          Automatiza lo que ya <span class="hl-demo">produces.</span>
+        </div>
+      </div>
+      <div style="background:var(--surface2);border-radius:10px;padding:1.25rem 1.5rem;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text-dimmer);margin-bottom:10px;letter-spacing:.04em;">SOBRE FONDO OSCURO (.hl--inv)</div>
+        <div style="font-size:28px;font-weight:700;letter-spacing:-.03em;color:#fff;background:#1c1a17;padding:16px 20px;border-radius:8px;">
+          De la operación diaria a <span class="hl-demo-inv">decisiones de gerencia.</span>
+        </div>
+      </div>
+      <div style="background:var(--surface2);border-radius:10px;padding:1.25rem 1.5rem;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text-dimmer);margin-bottom:10px;letter-spacing:.04em;">CSS</div>
+        <pre style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gold);line-height:1.8;overflow-x:auto;">.hl {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .78em; font-weight: 600;
+  color: #d96b00;
+  background: rgba(255,141,40,0.1);
+  border: 1px solid rgba(255,141,40,0.28);
+  border-radius: 5px;
+  padding: 3px 9px;
+  vertical-align: middle;
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="element-row">
+    <!-- Eyebrow labels -->
+    <div class="element-card">
+      <div class="element-label">Eyebrow labels</div>
+      <div class="element-title">// Etiquetas de sección</div>
+      <div class="element-body" style="margin-bottom:14px;">Siempre en IBM Plex Mono, tamaño 11px, uppercase, tracking +0.05em. Prefijo <code style="font-family:'IBM Plex Mono',monospace;font-size:11px;background:var(--surface2);padding:1px 5px;border-radius:3px;">//</code> obligatorio. Color: naranja en secciones claras, atenuado en oscuras.</div>
+      <div style="display:flex;flex-direction:column;gap:7px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.05em;">// LA TESIS</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--orange);letter-spacing:.05em;">// LÍNEA 01 · VISIÓN ARTIFICIAL</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-dimmer);letter-spacing:.05em;">// EMPECEMOS</div>
+      </div>
+    </div>
+
+    <!-- Status badges -->
+    <div class="element-card">
+      <div class="element-label">Badges de estado</div>
+      <div class="element-title">Estado de cada producto</div>
+      <div class="element-body" style="margin-bottom:14px;">Visibles en cada tarjeta de producto. Comunican honestidad sobre el roadmap — parte del posicionamiento. IBM Plex Mono, 10px, pill shape.</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;padding:3px 10px;border-radius:100px;background:rgba(40,168,74,.1);color:#28a84a;border:1px solid rgba(40,168,74,.2);">EN DESARROLLO</span>
+          <span style="font-size:12px;color:var(--text-dimmer);">Construcción activa</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;padding:3px 10px;border-radius:100px;background:rgba(59,130,196,.1);color:#3b82c4;border:1px solid rgba(59,130,196,.2);">EN DISEÑO</span>
+          <span style="font-size:12px;color:var(--text-dimmer);">Arquitectura definida</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;padding:3px 10px;border-radius:100px;background:rgba(196,138,0,.1);color:#c48a00;border:1px solid rgba(196,138,0,.2);">EN CONCEPTO</span>
+          <span style="font-size:12px;color:var(--text-dimmer);">Validación pendiente</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Naming convention -->
+    <div class="element-card">
+      <div class="element-label">Naming de productos</div>
+      <div class="element-title">synapta.nombre</div>
+      <div class="element-body" style="margin-bottom:14px;">Todo producto lleva el prefijo de marca en minúscula seguido de un punto y el nombre del problema que resuelve. Siempre en IBM Plex Mono cuando se muestra en UI.</div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <code style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--text);">synapta.rosas</code>
+        <code style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--text);">synapta.varillas</code>
+        <code style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--text);">synapta.agentes</code>
+      </div>
+    </div>
+
+    <!-- Progress indicators -->
+    <div class="element-card">
+      <div class="element-label">Indicadores de progreso</div>
+      <div class="element-title">Barras de roadmap</div>
+      <div class="element-body" style="margin-bottom:14px;">Cada tarjeta de producto incluye una barra de progreso que comunica visualmente el avance del desarrollo. Color sincronizado con el badge de estado.</div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div>
+          <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text-dimmer);margin-bottom:5px;"><span>synapta.rosas</span><span>55%</span></div>
+          <div style="height:4px;background:var(--surface2);border-radius:100px;overflow:hidden;"><div style="width:55%;height:100%;background:#1d7f3e;border-radius:100px;opacity:.7;"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text-dimmer);margin-bottom:5px;"><span>synapta.varillas</span><span>25%</span></div>
+          <div style="height:4px;background:var(--surface2);border-radius:100px;overflow:hidden;"><div style="width:25%;height:100%;background:#1a69c4;border-radius:100px;opacity:.7;"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text-dimmer);margin-bottom:5px;"><span>synapta.sanidad</span><span>8%</span></div>
+          <div style="height:4px;background:var(--surface2);border-radius:100px;overflow:hidden;"><div style="width:8%;height:100%;background:#a06200;border-radius:100px;opacity:.7;"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- 06 · VOZ Y TONO -->
+<section id="voz">
+<div class="page">
+  <div class="sec-chip">06 · Voz y Tono</div>
+  <h2 class="sec-title">Cómo <span class="hl">habla</span><br>Synapta</h2>
+  <p class="sec-sub">La voz de Synapta es directa, técnica y honesta. No vende tecnología — vende resultados. No exagera — muestra el estado real.</p>
+
+  <div class="voice-grid">
+    <div class="voice-card">
+      <div class="voice-num">01 ·</div>
+      <h4>Directa, no prepotente</h4>
+      <p>Synapta va al punto. No usa párrafos para decir lo que cabe en una oración. No grita ni exige — afirma y demuestra.</p>
+    </div>
+    <div class="voice-card">
+      <div class="voice-num">02 ·</div>
+      <h4>Técnica, no hermética</h4>
+      <p>Usa vocabulario técnico con precisión pero nunca lo usa para impresionar. Todo tecnicismo que aparece tiene un propósito. Si el cliente no lo entiende, se simplifica.</p>
+    </div>
+    <div class="voice-card">
+      <div class="voice-num">03 ·</div>
+      <h4>Honesta sobre el estado</h4>
+      <p>Los productos están en construcción y eso se dice con claridad. Las etiquetas EN DESARROLLO / EN DISEÑO / EN CONCEPTO son parte del posicionamiento — la transparencia es una ventaja, no una debilidad.</p>
+    </div>
+    <div class="voice-card">
+      <div class="voice-num">04 ·</div>
+      <h4>Vende valor, no tecnología</h4>
+      <p>Nunca se menciona IA como argumento de venta. Lo que se vende es la consecuencia: datos reales, decisiones más rápidas, pérdida visible, operación que escala. La tecnología es el cómo, no el qué.</p>
+    </div>
+  </div>
+
+  <h3 style="font-size:16px;font-weight:700;color:var(--text);margin:0 0 1rem;letter-spacing:-.02em;">Qué decimos · Qué no decimos</h3>
+  <div class="say-grid">
+    <div class="say-card say-yes">
+      <div class="say-label">✓ Synapta dice</div>
+      <div class="say-item"><div class="dot-yes"></div><span>"Cada proceso sin medir es valor que se escapa."</span></div>
+      <div class="say-item"><div class="dot-yes"></div><span>"Los datos que generas no están trabajando para ti."</span></div>
+      <div class="say-item"><div class="dot-yes"></div><span>"Conteo automático por lote, actualizado cada hora."</span></div>
+      <div class="say-item"><div class="dot-yes"></div><span>"En construcción. Buscando primeros pilotos."</span></div>
+      <div class="say-item"><div class="dot-yes"></div><span>"Este escenario representa una operación típica."</span></div>
+      <div class="say-item"><div class="dot-yes"></div><span>"Sin contratos de seis cifras. Sin esperar seis meses."</span></div>
+    </div>
+    <div class="say-card say-no">
+      <div class="say-label">✗ Synapta no dice</div>
+      <div class="say-item"><div class="dot-no"></div><span>"Potenciado por Inteligencia Artificial."</span></div>
+      <div class="say-item"><div class="dot-no"></div><span>"Miles de PyMEs ya confían en nosotros."</span></div>
+      <div class="say-item"><div class="dot-no"></div><span>"Solución 360° de última generación."</span></div>
+      <div class="say-item"><div class="dot-no"></div><span>"Transformación digital de tu empresa."</span></div>
+      <div class="say-item"><div class="dot-no"></div><span>"Revolucionamos la industria ecuatoriana."</span></div>
+      <div class="say-item"><div class="dot-no"></div><span>Testimonios o métricas que no existen aún.</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div style="display:flex;align-items:center;justify-content:center;gap:11px;margin-bottom:8px;">
+    <svg viewBox="0 0 400 400" width="28" height="28" fill="none">
+      <path d="M306 32L200 382" stroke="#FFD27E" stroke-width="22" stroke-linecap="round"/>
+      <path d="M23 377L207 377" stroke="#FFD27E" stroke-width="22" stroke-linecap="round"/>
+      <path d="M306 36L377 36" stroke="#FFD27E" stroke-width="22" stroke-linecap="round"/>
+      <path d="M200 30H377" stroke="#FF8D28" stroke-width="22" stroke-linecap="round"/>
+      <path d="M289 30L186 370" stroke="#FF8D28" stroke-width="22" stroke-linecap="round"/>
+      <path d="M23 365H193" stroke="#FF8D28" stroke-width="22" stroke-linecap="round"/>
+      <path d="M299 26L193 376" stroke="#6b6056" stroke-width="22" stroke-linecap="round"/>
+      <path d="M23 371H200" stroke="#6b6056" stroke-width="22" stroke-linecap="round"/>
+      <path d="M202 24H377" stroke="#6b6056" stroke-width="22" stroke-linecap="round"/>
+      <line x1="209" y1="19" x2="102" y2="371" stroke="#6b6056" stroke-width="22" stroke-linecap="round"/>
+    </svg>
+    <span style="font-size:26px;font-weight:700;color:var(--text);letter-spacing:-.03em;">Synapta</span>
+  </div>
+  <div class="footer-sub">Brand Book · Versión 0.1 · Pre-lanzamiento · 2026</div>
+  <div class="footer-meta">synapta.ec · hola@synapta.ec · @synapta.ia · Quito, Ecuador</div>
+</footer>
+
+</body>
+</html>
