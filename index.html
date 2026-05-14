@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Synapta — Inteligencia para la operación local.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+:root {
+  --brand:        #FF8D28;
+  --brand-dim:    #FFD27E;
+  --brand-strong: #d96b00;
+  --fg:           #2e2b28;
+  --fg-dim:       #4A4643;
+  --fg-dimmer:    #6b6560;
+  --bg-root:      #faf6f1;
+  --bg-warm:      #f2ece3;
+  --bg-card:      #fffcf8;
+  --bg-dark:      #1c1a17;
+  --outline:      #e0d8cf;
+  --outline-dim:  #cec5ba;
+  --green:        #1d7f3e;
+  --green-bg:     rgba(29,127,62,.09);
+  --blue:         #1a69c4;
+  --blue-bg:      rgba(26,105,196,.09);
+  --amber:        #a06200;
+  --amber-bg:     rgba(160,98,0,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{min-height:100%;}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg-root);color:var(--fg);font-size:14px;line-height:1.6;}
+a{text-decoration:none;color:inherit;}
+
+.wrap{max-width:1320px;margin:0 auto;padding:0 36px;}
+
+.btn-primary{background:var(--brand);color:#fff;padding:10px 22px;border-radius:7px;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:7px;transition:background .15s,transform .1s;border:none;cursor:pointer;}
+.btn-primary:hover{background:var(--brand-strong);}
+.btn-primary:active{transform:scale(.98);}
+.btn-ghost{background:transparent;color:var(--fg-dim);padding:10px 22px;border-radius:7px;font-size:14px;font-weight:500;border:1.5px solid var(--outline-dim);display:inline-flex;align-items:center;gap:7px;transition:border-color .15s,background .15s;cursor:pointer;}
+.btn-ghost:hover{border-color:var(--fg-dimmer);background:var(--bg-warm);}
+
+.nav-a{color:var(--fg-dim);font-size:13.5px;font-weight:500;transition:color .15s;}
+.nav-a:hover{color:var(--fg);}
+
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;color:var(--fg-dimmer);letter-spacing:.04em;margin-bottom:16px;display:block;}
+
+/* The signature gesture — italic brand orange, serif */
+em.g{font-style:italic;color:var(--brand);font-family:'Instrument Serif',serif;}
+
+.sh{font-size:clamp(36px,3.8vw,54px);font-weight:700;letter-spacing:-.035em;line-height:1.09;color:var(--fg);}
+.sh--w{color:#fff;}
+
+/* Status badges */
+.badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:100px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.03em;white-space:nowrap;}
+.b-dev{background:var(--green-bg);color:var(--green);border:1px solid rgba(29,127,62,.18);}
+.b-dis{background:var(--blue-bg);color:var(--blue);border:1px solid rgba(26,105,196,.18);}
+.b-con{background:var(--amber-bg);color:var(--amber);border:1px solid rgba(160,98,0,.18);}
+.b-con--inv{background:rgba(160,98,0,.18);color:#FFD27E;border:1px solid rgba(255,210,126,.2);}
+
+/* Product card */
+.pc{background:var(--bg-card);border:1px solid var(--outline);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:10px;transition:box-shadow .2s,border-color .2s;}
+.pc:hover{box-shadow:0 8px 32px rgba(0,0,0,.07);border-color:var(--outline-dim);}
+.pc--d{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08);}
+.pc--d:hover{box-shadow:0 8px 32px rgba(0,0,0,.3);border-color:rgba(255,255,255,.14);}
+
+.field{width:100%;padding:10px 14px;border:1.5px solid rgba(255,255,255,.12);border-radius:7px;font-size:14px;font-family:inherit;background:rgba(255,255,255,.05);color:#fff;outline:none;transition:border-color .15s;}
+.field:focus{border-color:var(--brand);}
+.field::placeholder{color:rgba(255,255,255,.25);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header style="position:sticky;top:0;z-index:1002;background:rgba(250,246,241,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--outline);">
+<nav class="wrap" style="height:58px;display:flex;align-items:center;justify-content:space-between;">
+  <a href="#" style="display:flex;align-items:center;gap:10px;">
+    <svg viewBox="0 0 400 400" width="26" height="26" fill="none">
+      <path d="M306 32L200 382" stroke="#FFD27E" stroke-width="24" stroke-linecap="round"/>
+      <path d="M23 377L207 377" stroke="#FFD27E" stroke-width="24" stroke-linecap="round"/>
+      <path d="M306 36L377 36" stroke="#FFD27E" stroke-width="24" stroke-linecap="round"/>
+      <path d="M200 30H377" stroke="#FF8D28" stroke-width="24" stroke-linecap="round"/>
+      <path d="M289 30L186 370" stroke="#FF8D28" stroke-width="24" stroke-linecap="round"/>
+      <path d="M23 365H193" stroke="#FF8D28" stroke-width="24" stroke-linecap="round"/>
+      <path d="M299 26L193 376" stroke="#4A4643" stroke-width="24" stroke-linecap="round"/>
+      <path d="M23 371H200" stroke="#4A4643" stroke-width="24" stroke-linecap="round"/>
+      <path d="M202 24H377" stroke="#4A4643" stroke-width="24" stroke-linecap="round"/>
+      <line x1="209" y1="19" x2="102" y2="371" stroke="#4A4643" stroke-width="24" stroke-linecap="round"/>
+    </svg>
+    <span style="font-weight:700;font-size:16px;color:var(--fg);letter-spacing:-.02em;">Synapta</span>
+  </a>
+  <div style="display:flex;gap:26px;">
+    <a href="#l01" class="nav-a">Visión artificial</a>
+    <a href="#l02" class="nav-a">Sistema de trabajo</a>
+    <a href="#porq" class="nav-a">Por qué Ecuador</a>
+    <a href="#estado" class="nav-a">Pilotos</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <a href="#cta" class="btn-ghost" style="padding:8px 16px;">Conversemos</a>
+    <a href="#cta" class="btn-primary" style="padding:8px 18px;">Únete a la lista →</a>
+  </div>
+</nav>
+</header>
+
+
+<!-- HERO -->
+<section style="min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 36px 56px;text-align:center;position:relative;overflow:hidden;background:var(--bg-root);">
+  <div style="position:absolute;top:100px;left:50%;transform:translateX(-50%);width:660px;height:260px;background:radial-gradient(ellipse,rgba(255,141,40,.11) 0%,transparent 70%);border-radius:50%;filter:blur(18px);pointer-events:none;"></div>
+
+  <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:500;letter-spacing:.07em;background:rgba(255,141,40,.08);border:1px solid rgba(255,141,40,.22);padding:5px 15px;border-radius:100px;display:inline-flex;margin-bottom:30px;color:var(--brand-strong);position:relative;z-index:1;">// PRE-LANZAMIENTO · QUITO 2027</span>
+
+  <h1 style="font-size:clamp(60px,8.5vw,100px);font-weight:700;letter-spacing:-.05em;line-height:.98;color:var(--fg);max-width:760px;position:relative;z-index:1;margin-bottom:24px;">
+    Automatiza lo que<br>ya produces.
+  </h1>
+
+  <p style="font-size:clamp(16px,1.8vw,20px);color:var(--fg-dim);max-width:500px;line-height:1.65;position:relative;z-index:1;margin-bottom:40px;">
+    Inteligencia operacional para PyMEs ecuatorianas.<br>Construida aquí, para los problemas de aquí.
+  </p>
+
+  <div style="display:flex;gap:12px;position:relative;z-index:1;margin-bottom:68px;flex-wrap:wrap;justify-content:center;">
+    <a href="#cta" class="btn-primary" style="padding:12px 26px;font-size:15px;">Únete a la lista →</a>
+    <a href="#cta" class="btn-ghost" style="padding:12px 22px;font-size:15px;">Conversemos</a>
+  </div>
+
+  <!-- Detection feed mockup -->
+  <div style="width:100%;max-width:900px;position:relative;z-index:1;">
+    <div style="background:#1c1a17;border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden;box-shadow:0 28px 80px rgba(0,0,0,.2),0 8px 20px rgba(0,0,0,.1);">
+      <!-- Toolbar -->
+      <div style="background:#242018;border-bottom:1px solid rgba(255,255,255,.07);padding:9px 16px;display:flex;align-items:center;gap:7px;">
+        <div style="width:10px;height:10px;border-radius:50%;background:#FF5F57;"></div>
+        <div style="width:10px;height:10px;border-radius:50%;background:#FFBD2E;"></div>
+        <div style="width:10px;height:10px;border-radius:50%;background:#28CA41;"></div>
+        <div style="flex:1;"></div>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:rgba(255,255,255,.28);">synapta.rosas · Finca El Rosedal · Lote A-14</span>
+        <span style="width:7px;height:7px;border-radius:50%;background:#28CA41;margin-left:10px;display:inline-block;"></span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(40,202,65,.65);">EN VIVO</span>
+      </div>
+      <!-- Content: feed + sidebar -->
+      <div style="display:grid;grid-template-columns:1fr 270px;min-height:320px;">
+        <!-- Video feed -->
+        <div style="background:#141210;position:relative;overflow:hidden;">
+          <!-- Simulated crop rows -->
+          <div style="position:absolute;inset:0;padding:20px;display:flex;flex-direction:column;gap:6px;opacity:.22;">
+            <div style="flex:1;display:flex;gap:5px;"><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div></div>
+            <div style="flex:1;display:flex;gap:5px;"><div style="flex:1;background:#1e3a1e;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#1e3a1e;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#1e3a1e;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#1e3a1e;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#1e3a1e;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#1e3a1e;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div></div>
+            <div style="flex:1;display:flex;gap:5px;"><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div></div>
+            <div style="flex:1;display:flex;gap:5px;"><div style="flex:1;background:#1e3a1e;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#1e3a1e;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#1e3a1e;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#1e3a1e;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#1e3a1e;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#1e3a1e;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div></div>
+            <div style="flex:1;display:flex;gap:5px;"><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div><div style="flex:1;background:#2a4a2a;border-radius:2px;"></div></div>
+          </div>
+          <!-- Bounding boxes -->
+          <div style="position:absolute;top:28%;left:12%;width:13%;height:34%;border:2px solid #28CA41;border-radius:3px;"></div>
+          <div style="position:absolute;top:28%;left:27%;width:13%;height:34%;border:2px solid #28CA41;border-radius:3px;"></div>
+          <div style="position:absolute;top:28%;left:42%;width:13%;height:34%;border:2px solid #FF8D28;border-radius:3px;"></div>
+          <div style="position:absolute;top:28%;left:57%;width:13%;height:34%;border:2px solid #28CA41;border-radius:3px;"></div>
+          <div style="position:absolute;top:28%;left:72%;width:13%;height:34%;border:2px solid #28CA41;border-radius:3px;"></div>
+          <!-- Box labels -->
+          <div style="position:absolute;top:calc(28% - 17px);left:12%;background:#28CA41;color:#fff;font-family:'IBM Plex Mono',monospace;font-size:8px;padding:2px 5px;border-radius:3px;white-space:nowrap;">✓ listo</div>
+          <div style="position:absolute;top:calc(28% - 17px);left:27%;background:#28CA41;color:#fff;font-family:'IBM Plex Mono',monospace;font-size:8px;padding:2px 5px;border-radius:3px;white-space:nowrap;">✓ listo</div>
+          <div style="position:absolute;top:calc(28% - 17px);left:42%;background:#FF8D28;color:#fff;font-family:'IBM Plex Mono',monospace;font-size:8px;padding:2px 5px;border-radius:3px;white-space:nowrap;">⚠ 2 días</div>
+          <div style="position:absolute;top:calc(28% - 17px);left:57%;background:#28CA41;color:#fff;font-family:'IBM Plex Mono',monospace;font-size:8px;padding:2px 5px;border-radius:3px;white-space:nowrap;">✓ listo</div>
+          <div style="position:absolute;top:calc(28% - 17px);left:72%;background:#28CA41;color:#fff;font-family:'IBM Plex Mono',monospace;font-size:8px;padding:2px 5px;border-radius:3px;white-space:nowrap;">✓ listo</div>
+          <!-- Counter badge -->
+          <div style="position:absolute;top:14px;left:14px;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:9px 14px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(255,255,255,.35);margin-bottom:2px;letter-spacing:.04em;">TALLOS DETECTADOS</div>
+            <div style="font-size:30px;font-weight:700;color:#fff;letter-spacing:-.03em;line-height:1;">247</div>
+          </div>
+        </div>
+        <!-- Sidebar -->
+        <div style="border-left:1px solid rgba(255,255,255,.07);padding:18px;display:flex;flex-direction:column;gap:11px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(255,255,255,.25);letter-spacing:.06em;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.06);">RESUMEN · LOTE A-14</div>
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(40,202,65,.65);margin-bottom:5px;letter-spacing:.04em;">LISTOS PARA CORTE</div>
+            <div style="font-size:26px;font-weight:700;color:#28CA41;letter-spacing:-.03em;">214</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(255,255,255,.22);margin-top:3px;">86.6% del lote</div>
+          </div>
+          <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:12px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(255,141,40,.65);margin-bottom:5px;letter-spacing:.04em;">EN MADURACIÓN</div>
+            <div style="font-size:26px;font-weight:700;color:#FF8D28;letter-spacing:-.03em;">33</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(255,255,255,.22);margin-top:3px;">Próximas 48 h</div>
+          </div>
+          <div style="margin-top:auto;padding-top:10px;border-top:1px solid rgba(255,255,255,.06);">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:rgba(255,255,255,.18);">synapta.rosas v0.9 · beta</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- BLOQUE DE TESIS -->
+<section style="background:var(--bg-warm);padding:96px 0;overflow:hidden;position:relative;">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:680px;height:240px;background:radial-gradient(ellipse,rgba(255,141,40,.07) 0%,transparent 70%);border-radius:50%;filter:blur(30px);pointer-events:none;"></div>
+  <div class="wrap" style="max-width:740px;position:relative;z-index:1;">
+    <span class="eyebrow">// LA TESIS</span>
+    <h2 class="sh" style="margin-bottom:24px;">
+      Los datos que generas no están trabajando para ti.
+    </h2>
+    <p style="font-family:'Instrument Serif',serif;font-size:clamp(17px,1.8vw,21px);color:var(--fg-dim);line-height:1.75;">
+      Cada operación genera información valiosa que hoy se pierde en cuadernos, hojas sueltas o simplemente sin registrar. Synapta convierte esa información en datos accionables: conteos, alertas, métricas de operación. Sin contratos de seis cifras y sin esperar seis meses para ver resultados.
+    </p>
+  </div>
+</section>
+
+
+<!-- RAZÓN DE SER -->
+<section style="background:var(--bg-root);padding:96px 0;">
+<div class="wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;">
+
+  <!-- Left: mission -->
+  <div>
+    <span class="eyebrow">// POR QUÉ EXISTIMOS</span>
+    <h2 class="sh" style="margin-bottom:22px;">Las decisiones con datos no son solo para corporaciones.</h2>
+    <p style="font-size:15px;color:var(--fg-dim);line-height:1.8;margin-bottom:16px;">
+      Una empresa grande tiene un equipo de datos, un ERP, analistas dedicados. Sabe exactamente qué produce, cuánto pierde y por qué. Toma decisiones respaldadas por números.
+    </p>
+    <p style="font-size:15px;color:var(--fg-dim);line-height:1.8;margin-bottom:16px;">
+      La PyME ecuatoriana toma las mismas decisiones — cuándo cosechar, cuánto recibió, qué proveedor cumplió — pero lo hace con una hoja de cálculo, a veces con un cuaderno, a veces de memoria.
+    </p>
+    <p style="font-size:15px;color:var(--fg-dim);line-height:1.8;">
+      Synapta existe para cerrar esa brecha. No cambiamos tu operación ni te pedimos empezar desde cero. Medimos lo que ya haces y te devolvemos datos precisos para que cada decisión esté respaldada por números reales.
+    </p>
+  </div>
+
+  <!-- Right: business case card -->
+  <div>
+    <div style="border:1px solid var(--outline);border-radius:13px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.05);">
+
+      <!-- Card header -->
+      <div style="background:var(--bg-warm);padding:18px 22px;border-bottom:1px solid var(--outline);">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--fg-dimmer);letter-spacing:.05em;margin-bottom:5px;">CASO ILUSTRATIVO · FLORICULTURA</div>
+        <div style="font-size:15px;font-weight:700;color:var(--fg);">Floricultora mediana · 4 ha · Cayambe</div>
+        <div style="font-size:13px;color:var(--fg-dimmer);margin-top:2px;">Operación: conteo de tallos listos para corte</div>
+      </div>
+
+      <!-- Before / After columns -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;">
+
+        <!-- ANTES -->
+        <div style="padding:20px 22px;border-right:1px solid var(--outline);background:var(--bg-card);">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:var(--fg-dimmer);letter-spacing:.05em;margin-bottom:16px;">SIN AUTOMATIZAR</div>
+          <div style="display:flex;flex-direction:column;gap:13px;">
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <div style="width:18px;height:18px;border-radius:4px;background:rgba(194,10,10,.08);border:1px solid rgba(194,10,10,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+                <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 1.5l6 6M7.5 1.5l-6 6" stroke="#C20A0A" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </div>
+              <div style="font-size:13px;color:var(--fg-dim);line-height:1.5;">2 operarios dedican 3 h diarias al conteo manual por lote</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <div style="width:18px;height:18px;border-radius:4px;background:rgba(194,10,10,.08);border:1px solid rgba(194,10,10,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+                <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 1.5l6 6M7.5 1.5l-6 6" stroke="#C20A0A" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </div>
+              <div style="font-size:13px;color:var(--fg-dim);line-height:1.5;">Margen de error del 10–15% en los conteos</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <div style="width:18px;height:18px;border-radius:4px;background:rgba(194,10,10,.08);border:1px solid rgba(194,10,10,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+                <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 1.5l6 6M7.5 1.5l-6 6" stroke="#C20A0A" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </div>
+              <div style="font-size:13px;color:var(--fg-dim);line-height:1.5;">Decisiones de corte basadas en estimaciones, no en datos</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <div style="width:18px;height:18px;border-radius:4px;background:rgba(194,10,10,.08);border:1px solid rgba(194,10,10,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+                <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 1.5l6 6M7.5 1.5l-6 6" stroke="#C20A0A" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </div>
+              <div style="font-size:13px;color:var(--fg-dim);line-height:1.5;">Tallos cortados tarde o temprano = producción sub-óptima</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DESPUÉS -->
+        <div style="padding:20px 22px;background:var(--bg-card);">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:var(--green);letter-spacing:.05em;margin-bottom:16px;">CON SYNAPTA</div>
+          <div style="display:flex;flex-direction:column;gap:13px;">
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <div style="width:18px;height:18px;border-radius:4px;background:var(--green-bg);border:1px solid rgba(29,127,62,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+                <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="#1d7f3e" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div style="font-size:13px;color:var(--fg-dim);line-height:1.5;">Conteo automático por lote, actualizado cada hora</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <div style="width:18px;height:18px;border-radius:4px;background:var(--green-bg);border:1px solid rgba(29,127,62,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+                <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="#1d7f3e" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div style="font-size:13px;color:var(--fg-dim);line-height:1.5;">Cero horas de conteo manual por semana</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <div style="width:18px;height:18px;border-radius:4px;background:var(--green-bg);border:1px solid rgba(29,127,62,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+                <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="#1d7f3e" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div style="font-size:13px;color:var(--fg-dim);line-height:1.5;">Decisiones de corte basadas en datos reales por tallo</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start;">
+              <div style="width:18px;height:18px;border-radius:4px;background:var(--green-bg);border:1px solid rgba(29,127,62,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+                <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2 2 4-4" stroke="#1d7f3e" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div style="font-size:13px;color:var(--fg-dim);line-height:1.5;">Sin contratar analistas ni reemplazar ningún equipo</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Card footer note -->
+      <div style="padding:13px 22px;border-top:1px solid var(--outline);background:var(--bg-warm);">
+        <p style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--fg-dimmer);line-height:1.5;">Este escenario representa una operación típica del sector. Los resultados reales se definen durante el piloto con cada cliente.</p>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</section>
+
+
+<!-- LÍNEA 01 · VISIÓN ARTIFICIAL -->
+<section id="l01" style="background:var(--bg-root);padding:96px 0;">
+<div class="wrap">
+  <div style="max-width:640px;margin-bottom:52px;">
+    <span class="eyebrow">// LÍNEA 01 · VISIÓN ARTIFICIAL</span>
+    <h2 class="sh" style="margin-bottom:16px;">
+      Medición automática de lo que ya produces.
+    </h2>
+    <p style="font-size:15px;color:var(--fg-dim);line-height:1.7;">
+      Modelos de visión entrenados para los objetos y problemas del contexto ecuatoriano, sin etiquetar miles de imágenes a mano.
+    </p>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
+
+    <div class="pc">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;color:var(--fg);">synapta.rosas</div>
+        <span class="badge b-dev">SKU 001 · EN DESARROLLO</span>
+      </div>
+      <p style="font-size:14px;color:var(--fg-dim);line-height:1.65;">Conteo de tallos listos para corte por lote. Para floricultoras de Cayambe, Tabacundo y el norte.</p>
+      <div style="height:3px;background:var(--outline);border-radius:100px;overflow:hidden;margin-top:4px;">
+        <div style="width:55%;height:100%;background:var(--green);border-radius:100px;opacity:.65;"></div>
+      </div>
+    </div>
+
+    <div class="pc">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;color:var(--fg);">synapta.varillas</div>
+        <span class="badge b-dis">SKU 002 · EN DISEÑO</span>
+      </div>
+      <p style="font-size:14px;color:var(--fg-dim);line-height:1.65;">Conteo de varillas, perfiles y tubos en planta. Para metalúrgicas y distribuidores de acero.</p>
+      <div style="height:3px;background:var(--outline);border-radius:100px;overflow:hidden;margin-top:4px;">
+        <div style="width:25%;height:100%;background:var(--blue);border-radius:100px;opacity:.65;"></div>
+      </div>
+    </div>
+
+    <div class="pc">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;color:var(--fg);">synapta.ganado</div>
+        <span class="badge b-dis">SKU 003 · EN DISEÑO</span>
+      </div>
+      <p style="font-size:14px;color:var(--fg-dim);line-height:1.65;">Conteo automático de cabezas en potreros y corrales. Para ganaderos de Sierra y Costa.</p>
+      <div style="height:3px;background:var(--outline);border-radius:100px;overflow:hidden;margin-top:4px;">
+        <div style="width:20%;height:100%;background:var(--blue);border-radius:100px;opacity:.65;"></div>
+      </div>
+    </div>
+
+    <div class="pc">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;color:var(--fg);">synapta.sanidad</div>
+        <span class="badge b-con">SKU 004 · EN CONCEPTO</span>
+      </div>
+      <p style="font-size:14px;color:var(--fg-dim);line-height:1.65;">Detección temprana de enfermedad en frutos y flores a partir de imágenes. Para florícolas y productores agrícolas.</p>
+      <div style="height:3px;background:var(--outline);border-radius:100px;overflow:hidden;margin-top:4px;">
+        <div style="width:8%;height:100%;background:var(--amber);border-radius:100px;opacity:.65;"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+
+<!-- LÍNEA 02 · MEJORAMIENTO -->
+<section id="l02" style="background:var(--bg-dark);padding:96px 0;">
+<div class="wrap">
+  <div style="max-width:640px;margin-bottom:52px;">
+    <span class="eyebrow" style="color:rgba(255,255,255,.28);">// LÍNEA 02 · MEJORAMIENTO DEL SISTEMA DE TRABAJO</span>
+    <h2 class="sh sh--w" style="margin-bottom:16px;">
+      De la operación diaria a decisiones de gerencia.
+    </h2>
+    <p style="font-size:15px;color:rgba(255,255,255,.42);line-height:1.7;">
+      Capas de análisis y automatización sobre lo que la operación ya genera. La materia prima son los datos de la Línea 01 y de tus propios procesos; el resultado son decisiones de gerencia.
+    </p>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:13px;">
+
+    <div class="pc pc--d">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;color:#fff;">synapta.datos</div>
+        <span class="badge b-con--inv">SKU 101 · EN CONCEPTO</span>
+      </div>
+      <p style="font-size:14px;color:rgba(255,255,255,.42);line-height:1.65;">Recolección estructurada de datos valiosos que hoy se pierden en cuadernos, hojas sueltas y video sin revisar.</p>
+    </div>
+
+    <div class="pc pc--d">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;color:#fff;">synapta.agentes</div>
+        <span class="badge b-con--inv">SKU 102 · EN CONCEPTO</span>
+      </div>
+      <p style="font-size:14px;color:rgba(255,255,255,.42);line-height:1.65;">Automatización de procesos repetitivos mediante agentes. Tareas administrativas y de seguimiento que dejan de hacerse a mano.</p>
+    </div>
+
+    <div class="pc pc--d">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;color:#fff;">synapta.performance</div>
+        <span class="badge b-con--inv">SKU 103 · EN CONCEPTO</span>
+      </div>
+      <p style="font-size:14px;color:rgba(255,255,255,.42);line-height:1.65;">Tracking de performance: indicadores de operación en el tiempo para ver qué mejora y qué no.</p>
+    </div>
+
+    <div class="pc pc--d">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;color:#fff;">synapta.proveedores</div>
+        <span class="badge b-con--inv">SKU 104 · EN CONCEPTO</span>
+      </div>
+      <p style="font-size:14px;color:rgba(255,255,255,.42);line-height:1.65;">Tracking de proveedores con datos verificables: cantidades reales recibidas, calidad, cumplimiento de tiempos.</p>
+    </div>
+
+  </div>
+</div>
+</section>
+
+
+<!-- POR QUÉ ECUADOR -->
+<section id="porq" style="background:var(--bg-warm);padding:96px 0;overflow:hidden;position:relative;">
+  <div style="position:absolute;top:50%;right:-60px;transform:translateY(-50%);width:580px;height:420px;background:rgba(255,141,40,.06);border-radius:50%;pointer-events:none;"></div>
+<div class="wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;position:relative;z-index:1;">
+  <div>
+    <span class="eyebrow">// EL PORQUÉ</span>
+    <h2 class="sh" style="margin-bottom:20px;">
+      Los modelos genéricos no conocen tu industria.
+    </h2>
+    <p style="font-size:15px;color:var(--fg-dim);line-height:1.75;margin-bottom:36px;">
+      La IA importada se entrenó con datos de otros países, otros productos, otras escalas. Una rosa ecuatoriana no se cuenta como una rosa holandesa. Una res en la sierra no se ve como una res en Texas. Synapta entrena modelos sobre el contexto local porque ese es el único que importa para tu negocio.
+    </p>
+    <a href="#cta" class="btn-primary">Conversemos →</a>
+  </div>
+  <div style="padding-top:6px;">
+    <div style="padding:26px 0;border-bottom:1px solid var(--outline);">
+      <div style="font-size:15px;font-weight:700;color:var(--fg);margin-bottom:6px;">Hecho en Ecuador.</div>
+      <div style="font-size:14px;color:var(--fg-dim);line-height:1.65;">Equipo en Quito. Modelos entrenados con datos del país.</div>
+    </div>
+    <div style="padding:26px 0;border-bottom:1px solid var(--outline);">
+      <div style="font-size:15px;font-weight:700;color:var(--fg);margin-bottom:6px;">Sobre tu hardware.</div>
+      <div style="font-size:14px;color:var(--fg-dim);line-height:1.65;">Funciona con el hardware que ya tienes. Sin reemplazar nada.</div>
+    </div>
+    <div style="padding:26px 0;">
+      <div style="font-size:15px;font-weight:700;color:var(--fg);margin-bottom:6px;">A precio local.</div>
+      <div style="font-size:14px;color:var(--fg-dim);line-height:1.65;">Cobrado en dólares razonables, no en presupuestos de multinacional.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ESTADO ACTUAL -->
+<section id="estado" style="background:var(--bg-root);padding:96px 0;">
+<div class="wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;max-width:1000px;">
+  <div>
+    <span class="eyebrow">// DÓNDE ESTAMOS</span>
+    <h2 class="sh" style="margin-bottom:20px;">
+      Arrancando en 2027. Buscando primeros pilotos.
+    </h2>
+    <p style="font-size:15px;color:var(--fg-dim);line-height:1.75;margin-bottom:32px;">
+      Synapta arranca operaciones en Ecuador en 2027. Ahora mismo estamos validando casos de uso con empresas dispuestas a probar primero. Si tu PyME tiene un proceso de conteo o medición que podría automatizarse, queremos hablar contigo antes de construir la solución.
+    </p>
+    <a href="#cta" class="btn-primary">Postula como piloto →</a>
+  </div>
+  <!-- Roadmap -->
+  <div>
+    <div style="display:flex;gap:18px;align-items:flex-start;padding:22px 0;border-bottom:1px solid var(--outline);">
+      <div style="width:9px;height:9px;border-radius:50%;background:var(--green);margin-top:5px;flex-shrink:0;box-shadow:0 0 0 4px var(--green-bg);"></div>
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--green);font-weight:600;margin-bottom:4px;letter-spacing:.04em;">AHORA · 2026</div>
+        <div style="font-size:14px;font-weight:700;color:var(--fg);">Validación de casos de uso</div>
+        <div style="font-size:13px;color:var(--fg-dimmer);margin-top:3px;line-height:1.55;">Conversaciones con PyMEs. Definición del roadmap.</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:18px;align-items:flex-start;padding:22px 0;border-bottom:1px solid var(--outline);">
+      <div style="width:9px;height:9px;border-radius:50%;background:var(--brand);margin-top:5px;flex-shrink:0;box-shadow:0 0 0 4px rgba(255,141,40,.12);"></div>
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--brand-strong);font-weight:600;margin-bottom:4px;letter-spacing:.04em;">Q1 2027</div>
+        <div style="font-size:14px;font-weight:700;color:var(--fg);">Pilotos sin costo</div>
+        <div style="font-size:13px;color:var(--fg-dimmer);margin-top:3px;line-height:1.55;">synapta.rosas en fincas seleccionadas de Cayambe.</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:18px;align-items:flex-start;padding:22px 0;">
+      <div style="width:9px;height:9px;border-radius:50%;background:var(--outline-dim);margin-top:5px;flex-shrink:0;"></div>
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--fg-dimmer);font-weight:600;margin-bottom:4px;letter-spacing:.04em;">2027</div>
+        <div style="font-size:14px;font-weight:700;color:var(--fg-dim);">Lanzamiento comercial</div>
+        <div style="font-size:13px;color:var(--fg-dimmer);margin-top:3px;line-height:1.55;">Línea 01 disponible. Apertura de Línea 02.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- CTA FINAL OSCURO -->
+<section id="cta" style="background:var(--bg-dark);padding:100px 0;">
+<div class="wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;max-width:1000px;">
+  <div>
+    <span class="eyebrow" style="color:rgba(255,255,255,.28);">// EMPECEMOS</span>
+    <h2 style="font-size:clamp(32px,3.2vw,46px);font-weight:700;letter-spacing:-.035em;line-height:1.1;color:#fff;margin-bottom:20px;">
+      ¿Tienes un proceso que se podría medir solo?
+    </h2>
+    <p style="font-size:15px;color:rgba(255,255,255,.42);line-height:1.75;">
+      Cuéntanos qué registras a mano hoy. Si encaja con lo que estamos construyendo, te contactamos para un piloto sin costo durante el primer trimestre de 2027.
+    </p>
+  </div>
+  <form style="display:flex;flex-direction:column;gap:11px;" onsubmit="event.preventDefault();">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div>
+        <label style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:rgba(255,255,255,.3);display:block;margin-bottom:6px;letter-spacing:.04em;">NOMBRE</label>
+        <input type="text" placeholder="Tu nombre" class="field">
+      </div>
+      <div>
+        <label style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:rgba(255,255,255,.3);display:block;margin-bottom:6px;letter-spacing:.04em;">EMPRESA</label>
+        <input type="text" placeholder="Tu empresa" class="field">
+      </div>
+    </div>
+    <div>
+      <label style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:rgba(255,255,255,.3);display:block;margin-bottom:6px;letter-spacing:.04em;">INDUSTRIA</label>
+      <select class="field" style="cursor:pointer;color:rgba(255,255,255,.55);">
+        <option value="" disabled selected style="background:#2a2622;">Selecciona tu industria</option>
+        <option style="background:#2a2622;color:#fff;">Floricultura</option>
+        <option style="background:#2a2622;color:#fff;">Ganadería</option>
+        <option style="background:#2a2622;color:#fff;">Metalurgia</option>
+        <option style="background:#2a2622;color:#fff;">Retail</option>
+        <option style="background:#2a2622;color:#fff;">Otro</option>
+      </select>
+    </div>
+    <div>
+      <label style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:rgba(255,255,255,.3);display:block;margin-bottom:6px;letter-spacing:.04em;">¿QUÉ CUENTAS O MIDES HOY A MANO?</label>
+      <textarea placeholder="Cuéntanos el problema..." class="field" style="resize:vertical;min-height:90px;"></textarea>
+    </div>
+    <div>
+      <label style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:rgba(255,255,255,.3);display:block;margin-bottom:6px;letter-spacing:.04em;">EMAIL</label>
+      <input type="email" placeholder="tu@empresa.com" class="field">
+    </div>
+    <button type="submit" class="btn-primary" style="margin-top:4px;justify-content:center;padding:12px;font-size:15px;">Enviar</button>
+  </form>
+</div>
+</section>
+
+
+<!-- FOOTER -->
+<footer style="background:#141210;padding:56px 0 36px;border-top:1px solid rgba(255,255,255,.04);">
+<div class="wrap">
+  <div style="display:grid;grid-template-columns:210px 1fr;gap:64px;margin-bottom:44px;">
+    <div>
+      <a href="#" style="display:flex;align-items:center;gap:9px;margin-bottom:12px;">
+        <svg viewBox="0 0 400 400" width="22" height="22" fill="none">
+          <path d="M306 32L200 382" stroke="#FFD27E" stroke-width="24" stroke-linecap="round"/>
+          <path d="M23 377L207 377" stroke="#FFD27E" stroke-width="24" stroke-linecap="round"/>
+          <path d="M306 36L377 36" stroke="#FFD27E" stroke-width="24" stroke-linecap="round"/>
+          <path d="M200 30H377" stroke="#FF8D28" stroke-width="24" stroke-linecap="round"/>
+          <path d="M289 30L186 370" stroke="#FF8D28" stroke-width="24" stroke-linecap="round"/>
+          <path d="M23 365H193" stroke="#FF8D28" stroke-width="24" stroke-linecap="round"/>
+          <path d="M299 26L193 376" stroke="#6b6560" stroke-width="24" stroke-linecap="round"/>
+          <path d="M23 371H200" stroke="#6b6560" stroke-width="24" stroke-linecap="round"/>
+          <path d="M202 24H377" stroke="#6b6560" stroke-width="24" stroke-linecap="round"/>
+          <line x1="209" y1="19" x2="102" y2="371" stroke="#6b6560" stroke-width="24" stroke-linecap="round"/>
+        </svg>
+        <span style="font-weight:700;font-size:15px;color:#fff;letter-spacing:-.02em;">Synapta</span>
+      </a>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:rgba(255,255,255,.22);margin-bottom:10px;">synapta.ec</div>
+      <p style="font-size:13px;color:rgba(255,255,255,.32);line-height:1.6;max-width:175px;">Automatización inteligente para la industria ecuatoriana.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;">
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:rgba(255,255,255,.18);letter-spacing:.07em;margin-bottom:14px;">// PRODUCTO</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:11px;">
+          <li><a href="#l01" style="font-size:13px;color:rgba(255,255,255,.38);transition:color .15s;">Visión artificial</a></li>
+          <li><a href="#l02" style="font-size:13px;color:rgba(255,255,255,.38);transition:color .15s;">Mejoramiento del sistema de trabajo</a></li>
+          <li><a href="#estado" style="font-size:13px;color:rgba(255,255,255,.38);transition:color .15s;">Pilotos 2027</a></li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:rgba(255,255,255,.18);letter-spacing:.07em;margin-bottom:14px;">// EMPRESA</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:11px;">
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.38);transition:color .15s;">Sobre Synapta</a></li>
+          <li><a href="#cta" style="font-size:13px;color:rgba(255,255,255,.38);transition:color .15s;">Contacto</a></li>
+          <li><span style="font-size:13px;color:rgba(255,255,255,.2);">Blog <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;">(próximamente)</span></span></li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:rgba(255,255,255,.18);letter-spacing:.07em;margin-bottom:14px;">// CONTACTO</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:11px;">
+          <li><a href="mailto:hola@synapta.ec" style="font-size:13px;color:rgba(255,255,255,.38);transition:color .15s;">hola@synapta.ec</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.38);transition:color .15s;">@synapta.ia</a></li>
+          <li><span style="font-size:13px;color:rgba(255,255,255,.22);">Quito, Ecuador</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(255,255,255,.05);padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+    <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:rgba(255,255,255,.16);">© 2026 synapta.ec · Pre-lanzamiento</p>
+    <p style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:rgba(255,255,255,.12);">Quito, Ecuador · 2027</p>
+  </div>
+</div>
+</footer>
+
+</body>
+</html>
