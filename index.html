@@ -6,7 +6,7 @@
 <title>Synapta — Inteligencia para la operación local.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
 :root {
@@ -47,8 +47,9 @@ a{text-decoration:none;color:inherit;}
 
 .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;color:var(--fg-dimmer);letter-spacing:.04em;margin-bottom:16px;display:block;}
 
-/* The signature gesture — italic brand orange, serif */
-em.g{font-style:italic;color:var(--brand);font-family:'Instrument Serif',serif;}
+/* Data-label highlight — monospace chip, mirrors the detection tags in the hero */
+.hl{display:inline;font-family:'IBM Plex Mono',monospace;font-size:.78em;font-weight:600;letter-spacing:.02em;color:var(--brand-strong);background:rgba(255,141,40,.1);border:1px solid rgba(255,141,40,.28);border-radius:5px;padding:3px 9px;vertical-align:middle;white-space:nowrap;}
+.hl--inv{display:inline;font-family:'IBM Plex Mono',monospace;font-size:.78em;font-weight:600;letter-spacing:.02em;color:#FFD27E;background:rgba(255,210,126,.1);border:1px solid rgba(255,210,126,.2);border-radius:5px;padding:3px 9px;vertical-align:middle;white-space:nowrap;}
 
 .sh{font-size:clamp(36px,3.8vw,54px);font-weight:700;letter-spacing:-.035em;line-height:1.09;color:var(--fg);}
 .sh--w{color:#fff;}
@@ -94,7 +95,7 @@ em.g{font-style:italic;color:var(--brand);font-family:'Instrument Serif',serif;}
   <div style="display:flex;gap:26px;">
     <a href="#l01" class="nav-a">Visión artificial</a>
     <a href="#l02" class="nav-a">Sistema de trabajo</a>
-    <a href="#porq" class="nav-a">Por qué Ecuador</a>
+    <a href="#valor" class="nav-a">El valor</a>
     <a href="#estado" class="nav-a">Pilotos</a>
   </div>
   <div style="display:flex;align-items:center;gap:12px;">
@@ -112,7 +113,7 @@ em.g{font-style:italic;color:var(--brand);font-family:'Instrument Serif',serif;}
   <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:500;letter-spacing:.07em;background:rgba(255,141,40,.08);border:1px solid rgba(255,141,40,.22);padding:5px 15px;border-radius:100px;display:inline-flex;margin-bottom:30px;color:var(--brand-strong);position:relative;z-index:1;">// PRE-LANZAMIENTO · QUITO 2027</span>
 
   <h1 style="font-size:clamp(60px,8.5vw,100px);font-weight:700;letter-spacing:-.05em;line-height:.98;color:var(--fg);max-width:760px;position:relative;z-index:1;margin-bottom:24px;">
-    Automatiza lo que<br>ya produces.
+    Automatiza lo que ya <span class="hl">produces.</span>
   </h1>
 
   <p style="font-size:clamp(16px,1.8vw,20px);color:var(--fg-dim);max-width:500px;line-height:1.65;position:relative;z-index:1;margin-bottom:40px;">
@@ -198,7 +199,7 @@ em.g{font-style:italic;color:var(--brand);font-family:'Instrument Serif',serif;}
     <h2 class="sh" style="margin-bottom:24px;">
       Los datos que generas no están trabajando para ti.
     </h2>
-    <p style="font-family:'Instrument Serif',serif;font-size:clamp(17px,1.8vw,21px);color:var(--fg-dim);line-height:1.75;">
+    <p style="font-size:17px;color:var(--fg-dim);line-height:1.8;">
       Cada operación genera información valiosa que hoy se pierde en cuadernos, hojas sueltas o simplemente sin registrar. Synapta convierte esa información en datos accionables: conteos, alertas, métricas de operación. Sin contratos de seis cifras y sin esperar seis meses para ver resultados.
     </p>
   </div>
@@ -320,7 +321,7 @@ em.g{font-style:italic;color:var(--brand);font-family:'Instrument Serif',serif;}
   <div style="max-width:640px;margin-bottom:52px;">
     <span class="eyebrow">// LÍNEA 01 · VISIÓN ARTIFICIAL</span>
     <h2 class="sh" style="margin-bottom:16px;">
-      Medición automática de lo que ya produces.
+      <span class="hl">Medición automática</span> de lo que ya produces.
     </h2>
     <p style="font-size:15px;color:var(--fg-dim);line-height:1.7;">
       Modelos de visión entrenados para los objetos y problemas del contexto ecuatoriano, sin etiquetar miles de imágenes a mano.
@@ -383,7 +384,7 @@ em.g{font-style:italic;color:var(--brand);font-family:'Instrument Serif',serif;}
   <div style="max-width:640px;margin-bottom:52px;">
     <span class="eyebrow" style="color:rgba(255,255,255,.28);">// LÍNEA 02 · MEJORAMIENTO DEL SISTEMA DE TRABAJO</span>
     <h2 class="sh sh--w" style="margin-bottom:16px;">
-      De la operación diaria a decisiones de gerencia.
+      De la operación diaria a <span class="hl--inv">decisiones de gerencia.</span>
     </h2>
     <p style="font-size:15px;color:rgba(255,255,255,.42);line-height:1.7;">
       Capas de análisis y automatización sobre lo que la operación ya genera. La materia prima son los datos de la Línea 01 y de tus propios procesos; el resultado son decisiones de gerencia.
@@ -429,32 +430,37 @@ em.g{font-style:italic;color:var(--brand);font-family:'Instrument Serif',serif;}
 
 
 <!-- POR QUÉ ECUADOR -->
-<section id="porq" style="background:var(--bg-warm);padding:96px 0;overflow:hidden;position:relative;">
-  <div style="position:absolute;top:50%;right:-60px;transform:translateY(-50%);width:580px;height:420px;background:rgba(255,141,40,.06);border-radius:50%;pointer-events:none;"></div>
-<div class="wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;position:relative;z-index:1;">
-  <div>
-    <span class="eyebrow">// EL PORQUÉ</span>
-    <h2 class="sh" style="margin-bottom:20px;">
-      Los modelos genéricos no conocen tu industria.
+<section id="valor" style="background:var(--bg-warm);padding:96px 0;">
+<div class="wrap">
+  <div style="max-width:680px;margin-bottom:56px;">
+    <span class="eyebrow">// EL VALOR SIN EXPLORAR</span>
+    <h2 class="sh" style="margin-bottom:18px;">
+      Cada proceso sin medir es <span class="hl">valor</span> que se escapa.
     </h2>
-    <p style="font-size:15px;color:var(--fg-dim);line-height:1.75;margin-bottom:36px;">
-      La IA importada se entrenó con datos de otros países, otros productos, otras escalas. Una rosa ecuatoriana no se cuenta como una rosa holandesa. Una res en la sierra no se ve como una res en Texas. Synapta entrena modelos sobre el contexto local porque ese es el único que importa para tu negocio.
+    <p style="font-size:15px;color:var(--fg-dim);line-height:1.8;">
+      No hace falta más información. Ya la tienes. La diferencia entre una operación buena y una excelente está en saber qué ocurre en tiempo real — no al día siguiente, no con la estimación del encargado. Synapta convierte lo que ya haces en datos que trabajan para ti.
     </p>
-    <a href="#cta" class="btn-primary">Conversemos →</a>
   </div>
-  <div style="padding-top:6px;">
-    <div style="padding:26px 0;border-bottom:1px solid var(--outline);">
-      <div style="font-size:15px;font-weight:700;color:var(--fg);margin-bottom:6px;">Hecho en Ecuador.</div>
-      <div style="font-size:14px;color:var(--fg-dim);line-height:1.65;">Equipo en Quito. Modelos entrenados con datos del país.</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+
+    <div class="pc" style="padding:28px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:var(--brand-strong);letter-spacing:.05em;margin-bottom:14px;">01 ·</div>
+      <div style="font-size:16px;font-weight:700;color:var(--fg);margin-bottom:10px;line-height:1.3;">Reacción antes que pérdida.</div>
+      <p style="font-size:14px;color:var(--fg-dim);line-height:1.7;">Cuando mides en tiempo real, el problema aparece antes de costar. El que sabe primero actúa primero — y esa ventana vale dinero.</p>
     </div>
-    <div style="padding:26px 0;border-bottom:1px solid var(--outline);">
-      <div style="font-size:15px;font-weight:700;color:var(--fg);margin-bottom:6px;">Sobre tu hardware.</div>
-      <div style="font-size:14px;color:var(--fg-dim);line-height:1.65;">Funciona con el hardware que ya tienes. Sin reemplazar nada.</div>
+
+    <div class="pc" style="padding:28px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:var(--brand-strong);letter-spacing:.05em;margin-bottom:14px;">02 ·</div>
+      <div style="font-size:16px;font-weight:700;color:var(--fg);margin-bottom:10px;line-height:1.3;">Lo que no ves tiene precio.</div>
+      <p style="font-size:14px;color:var(--fg-dim);line-height:1.7;">Todo lo que se estima en lugar de medirse carga un margen de error. Ese margen es pérdida acumulada invisible — presente en cada turno, en cada lote, en cada entrega.</p>
     </div>
-    <div style="padding:26px 0;">
-      <div style="font-size:15px;font-weight:700;color:var(--fg);margin-bottom:6px;">A precio local.</div>
-      <div style="font-size:14px;color:var(--fg-dim);line-height:1.65;">Cobrado en dólares razonables, no en presupuestos de multinacional.</div>
+
+    <div class="pc" style="padding:28px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:var(--brand-strong);letter-spacing:.05em;margin-bottom:14px;">03 ·</div>
+      <div style="font-size:16px;font-weight:700;color:var(--fg);margin-bottom:10px;line-height:1.3;">Tu operación sin techo.</div>
+      <p style="font-size:14px;color:var(--fg-dim);line-height:1.7;">Un sistema que mide automáticamente no se cansa, no olvida, no depende de turnos. La capacidad que ya tienes puede rendir más sin agregar una sola persona.</p>
     </div>
+
   </div>
 </div>
 </section>
@@ -510,7 +516,7 @@ em.g{font-style:italic;color:var(--brand);font-family:'Instrument Serif',serif;}
   <div>
     <span class="eyebrow" style="color:rgba(255,255,255,.28);">// EMPECEMOS</span>
     <h2 style="font-size:clamp(32px,3.2vw,46px);font-weight:700;letter-spacing:-.035em;line-height:1.1;color:#fff;margin-bottom:20px;">
-      ¿Tienes un proceso que se podría medir solo?
+      ¿Tienes un proceso que se podría <span class="hl--inv">medir solo?</span>
     </h2>
     <p style="font-size:15px;color:rgba(255,255,255,.42);line-height:1.75;">
       Cuéntanos qué registras a mano hoy. Si encaja con lo que estamos construyendo, te contactamos para un piloto sin costo durante el primer trimestre de 2027.
